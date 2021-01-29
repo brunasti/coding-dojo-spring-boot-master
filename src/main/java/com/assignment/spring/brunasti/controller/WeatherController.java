@@ -1,6 +1,9 @@
-package com.assignment.spring;
+package com.assignment.spring.brunasti.controller;
 
-import com.assignment.spring.api.WeatherResponse;
+import com.assignment.spring.Constants;
+import com.assignment.spring.brunasti.model.WeatherEntity;
+import com.assignment.spring.brunasti.repository.WeatherRepository;
+import com.assignment.spring.brunasti.rest.resources.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

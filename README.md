@@ -62,6 +62,10 @@ But it doesn't respond to the expected URL
 
     http://localhost:8080/weather
 
+We still have to link the application to the expected URLs.
+
+I remove completely the com.assignment.spring.Application class.
+
 ## Standard Spring MVC project directories structure
 
 I create under com.assignment.spring.brunasti a standard directories structure for the Spring MVN projects:
@@ -70,6 +74,31 @@ I create under com.assignment.spring.brunasti a standard directories structure f
     - model
     - repository
     - validation
+
+I even create an extra directory for the REST API resources
+
+    - rest.resources
+
+I move the original classes into the new directories according to their roles.
+
+I check that all is still building correctly with a 
+
+    - mvn clean install
+
+## New Execution
+
+Executing the application and calling the URL
+
+    - http://localhost:8080/weather
+
+results in a NullPointerException:
+
+    java.lang.NullPointerException: null
+	at java.base/java.lang.String.replace(String.java:2143) ~[na:na]
+	at com.assignment.spring.brunasti.controller.WeatherController.weather(WeatherController.java:27) ~[classes/:na]
+    ....
+
+We can now start investigating on the business and application logic and make it works.
 
 
 
