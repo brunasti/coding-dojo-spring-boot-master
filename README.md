@@ -55,6 +55,22 @@ Of course I opt to remove the original one.
 
 The build is now successful.
 
+## First empty Execution
+
+The application starts correctly.
+But it doesn't respond to the expected URL
+
+    http://localhost:8080/weather
+
+## Standard Spring MVC project directories structure
+
+I create under com.assignment.spring.brunasti a standard directories structure for the Spring MVN projects:
+
+    - controller
+    - model
+    - repository
+    - validation
+
 
 
 ---
