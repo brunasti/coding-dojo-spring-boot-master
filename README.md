@@ -2,16 +2,20 @@ Leaseplan Spring Boot Coding Assignment
 ---
 
 ## The origins
+
+I loaded the project into my IDE and tried to build the application without success.
+I then tried to fix the pom.xml by adding some patch, then changing some characteristics and annotation in the classes without success.
+
 The original structure is completely broken.
 
 
 ## Generation of a new structure
 
-Instead of trying to fix it, I decided to restart completely the project by generating a skeleton from https://start.spring.io/
+Instead of trying to fix the original application, I decided to restart completely the project by generating a skeleton from https://start.spring.io/
 
 - https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.4.2.RELEASE&packaging=war&jvmVersion=1.8&groupId=com.assignment.spring&artifactId=brunasti&name=brunasti&description=Leaseplan%20Spring%20Boot%20Coding%20Assignment&packageName=com.assignment.spring.brunasti&dependencies=devtools,lombok,configuration-processor,data-jpa,h2,postgresql,restdocs,web
 
-I replaced all the project with the material generated in the above start.spring.io setting
+I started the new project with the material generated in the above start.spring.io setting
 
 ## Projects merging
 
@@ -43,7 +47,7 @@ I added in the pom.xml the following section:
     </profiles>
 
 ### Java version
-And changed the version of Java from 11 to 8
+Then I changed the version of Java from 11 to 8
 
     <properties>
 		<java.version>1.8</java.version>
@@ -57,8 +61,7 @@ The build is now successful.
 
 ## First empty Execution
 
-The application starts correctly.
-But it doesn't respond to the expected URL
+The application starts correctly, but it doesn't respond to the expected URL
 
     http://localhost:8080/weather
 
