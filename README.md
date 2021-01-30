@@ -127,6 +127,29 @@ If we provide the missing city parameter the result is:
 
 Still to be handled but much better
 
+## Registering for the OpenWeather API 
+
+In the Constants class I insert the API key that I obtained registering on the OpenWeather web site:
+
+    public static final String APP_ID = "25dd162561e22decc4a8578857b7c018";
+
+This is not a very good way to store the key because, when it will expire and there will be the need of updating, a new version of the software must be redeployed.
+
+And even the name of the constant is not good because it refer to an ID instead of a key.
+
+## Adding logging capability
+
+By annotating the desired classes with
+    
+    @Slf4j
+
+we can start logging what the app is doing, for example showing which URL the application is calling:
+
+    log.info("enter weather url [{}]",url);
+
+results in
+
+    2021-01-30 16:49:58.162  INFO 13451 --- [nio-8080-exec-1] c.a.s.b.controller.WeatherController     : enter weather url [http://api.openweathermap.org/data/2.5/weather?q=milan&APPID=25dd162561e22decc4a8578857b7c018]
 
 
 

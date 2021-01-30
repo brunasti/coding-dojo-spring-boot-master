@@ -1,19 +1,19 @@
 package com.assignment.spring.brunasti.controller;
 
-import com.assignment.spring.Constants;
+import com.assignment.spring.brunasti.Constants;
 import com.assignment.spring.brunasti.model.WeatherEntity;
 import com.assignment.spring.brunasti.repository.WeatherRepository;
 import com.assignment.spring.brunasti.rest.resources.WeatherResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @RestController
+@Slf4j
 public class WeatherController {
 
     @Autowired
@@ -25,7 +25,10 @@ public class WeatherController {
     @GetMapping("/weather")
     @ResponseStatus(HttpStatus.OK)
     public WeatherEntity weather(@RequestParam String city) {
-        String url = Constants.WEATHER_API_URL.replace("{city}", city).replace("{appid}", Constants.APP_ID);
+        log.info("enter weather city [{}]",city);
+        String url = Constants.WEATHER_API_URL.replace("{city}", city).replace("{appid}", Constants.WEATHER_API_KEY);
+        log.info("enter weather url [{}]",url);
+
         ResponseEntity<WeatherResponse> response = restTemplate.getForEntity(url, WeatherResponse.class);
         return mapper(response.getBody());
     }
