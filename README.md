@@ -103,6 +103,31 @@ results in a NullPointerException:
 
 We can now start investigating on the business and application logic and make it works.
 
+## APIs Documentation
+
+The above mentioned exception is due to:
+- unhandled error conditions
+- missing documentation
+
+Let's start to fix the exception handling by transforming the signature of the function and it's annotation.
+
+After this first change the response is now:
+
+    There was an unexpected error (type=Bad Request, status=400).
+    Required String parameter 'city' is not present
+    org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'city' is not present
+
+At least is no more a null point error and the city parameter is said to be required
+
+If we provide the missing city parameter the result is:
+
+    There was an unexpected error (type=Internal Server Error, status=500).
+    401 Unauthorized: [{"cod":401, "message": "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."}]
+    org.springframework.web.client.HttpClientErrorException$Unauthorized: 401 Unauthorized: [{"cod":401, "message": "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."}]
+
+Still to be handled but much better
+
+
 
 
 ---
