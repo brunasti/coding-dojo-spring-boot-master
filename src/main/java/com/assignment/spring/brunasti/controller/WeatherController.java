@@ -5,7 +5,6 @@ import com.assignment.spring.brunasti.model.WeatherEntity;
 import com.assignment.spring.brunasti.repository.WeatherRepository;
 import com.assignment.spring.brunasti.rest.resources.WeatherResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +15,13 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class WeatherController {
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final WeatherRepository weatherRepository;
+    private final RestTemplate restTemplate;
 
-    @Autowired
-    private WeatherRepository weatherRepository;
+    WeatherController(WeatherRepository weatherRepository, RestTemplate restTemplate) {
+        this.weatherRepository = weatherRepository;
+        this.restTemplate = restTemplate;
+    }
 
     @GetMapping("/weather")
     @ResponseStatus(HttpStatus.OK)

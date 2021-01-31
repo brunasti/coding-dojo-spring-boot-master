@@ -117,7 +117,7 @@ After this first change the response is now:
     Required String parameter 'city' is not present
     org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'city' is not present
 
-At least is no more a null point error and the city parameter is said to be required
+At least is no more a null point error, and the city parameter is said to be required
 
 If we provide the missing city parameter the result is:
 
@@ -125,7 +125,7 @@ If we provide the missing city parameter the result is:
     401 Unauthorized: [{"cod":401, "message": "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."}]
     org.springframework.web.client.HttpClientErrorException$Unauthorized: 401 Unauthorized: [{"cod":401, "message": "Invalid API key. Please see http://openweathermap.org/faq#error401 for more info."}]
 
-Still to be handled but much better
+This error is still to be handled but much better
 
 ## Registering for the OpenWeather API 
 
@@ -135,7 +135,9 @@ In the Constants class I insert the API key that I obtained registering on the O
 
 This is not a very good way to store the key because, when it will expire and there will be the need of updating, a new version of the software must be redeployed.
 
-And even the name of the constant is not good because it refer to an ID instead of a key.
+Even the name of the constant is not good because it refers to an ID instead of a key.
+
+I change it to WEATHER_API_KEY
 
 ## Adding logging capability
 
@@ -147,10 +149,23 @@ we can start logging what the app is doing, for example showing which URL the ap
 
     log.info("enter weather url [{}]",url);
 
-results in
+This results in
 
     2021-01-30 16:49:58.162  INFO 13451 --- [nio-8080-exec-1] c.a.s.b.controller.WeatherController     : enter weather url [http://api.openweathermap.org/data/2.5/weather?q=milan&APPID=25dd162561e22decc4a8578857b7c018]
 
+
+## Test coverage
+
+The result of a first test coverage run provides a very low value:
+
+- 30% of classes touched by tests
+- 4% of the code lines covered
+
+This is far from enough, not to say optimal.
+
+But before improving the coverage I need to fix some more structural aspects of the application.
+
+- removing @Autowired from WeatherController
 
 
 ---
