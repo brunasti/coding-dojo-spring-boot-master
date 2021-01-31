@@ -44,14 +44,31 @@ class BrunastiApplicationTests {
 				)
 				.andDo(print())
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString(), WeatherEntity.class);
-
 		assertNotNull(weatherEntity);
 		assertEquals("Amsterdam", weatherEntity.getCity());
 		assertEquals("NL", weatherEntity.getCountry());
 		assertNotNull(weatherEntity.getTemperature());
 		assertNotNull(weatherEntity.getId());
 		assertTrue(weatherEntity.getId() > 0);
+	}
 
+	@Test
+	public void testGetWeather_ambiguous() throws Exception {
+		WeatherEntity weatherEntity = om.readValue(mockMvc.perform(get("/weather?city=roma")
+				)
+				.andDo(print())
+				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString(), WeatherEntity.class);
+		assertNotNull(weatherEntity);
+		assertEquals("Rome", weatherEntity.getCity());
+		assertEquals("US", weatherEntity.getCountry());
+
+		weatherEntity = om.readValue(mockMvc.perform(get("/weather?city=roma,it")
+				)
+				.andDo(print())
+				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString(), WeatherEntity.class);
+		assertNotNull(weatherEntity);
+		assertEquals("Rome", weatherEntity.getCity()); // THIS IS WRONG, SHOULD BE ROMA...
+		assertEquals("IT", weatherEntity.getCountry());
 	}
 
 	@Test
@@ -94,7 +111,7 @@ class BrunastiApplicationTests {
 
 	@Test
 	public void testGetAllWeather() throws Exception {
-		List<WeatherEntity> weatherEntities = om.readValue(mockMvc.perform(get("/weather_all")
+		ArrayList<WeatherEntity> weatherEntities = om.readValue(mockMvc.perform(get("/weather_all")
 		)
 				.andDo(print())
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString(), ArrayList.class);

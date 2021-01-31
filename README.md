@@ -187,6 +187,49 @@ A correct error handling requires the definition of specific set of exception co
 
 For example in case that an user requires the weather for a city which doesn't exists a CityNotFoundException is internally rised and a 404 code is returned to the user.
 
+With the added tests the coverage results:
+
+- 93% of classes touched by tests
+- 72% of the code lines covered
+
+
+## Country selection
+
+There is an interesting case: the OpenWeather application in USA centric, so if request Roma (the Italian capital) I get instead a small city in the USA:
+
+    http://localhost:8080/weather?city=roma
+
+The output is:
+    
+    {
+        "id": 5,
+        "city": "Rome",
+        "country": "US",
+        "temperature": 279.17
+    }
+
+We need to find how to avoid this misunderstanding.
+
+This can be done by adding more info in the API call:
+
+    api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
+
+In this way if we call:
+
+    http://localhost:8080/weather?city=roma,it
+
+The output of our system is:
+
+    {
+        "id": 7,
+        "city": "Rome",
+        "country": "IT",
+        "temperature": 285.66
+    }
+
+And this is what we expected.
+
+
 
 ---
 
