@@ -170,6 +170,12 @@ But before improving the coverage I need to fix some more structural aspects of 
 - moving the business logic from the controller to an ad hoc class 
 - adding Lombok annotation to have more userfriendly functions in many classes
 
+With the above changes we already got to these new coverage results:
+
+- 40% of classes touched by tests
+- 9% of the code lines covered
+
+
 ---
 # Original README.md
 
