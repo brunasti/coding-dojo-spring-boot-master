@@ -166,6 +166,7 @@ This is far from enough, not to say optimal.
 But before improving the coverage I need to fix some more structural aspects of the application.
 
 - removing @Autowired from WeatherController
+- moving the transformation of the WeatherResponse into a WeatherEntity in an ad hoc class and package
 
 
 ---

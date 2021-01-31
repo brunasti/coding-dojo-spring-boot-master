@@ -1,6 +1,7 @@
 package com.assignment.spring.brunasti.controller;
 
 import com.assignment.spring.brunasti.Constants;
+import com.assignment.spring.brunasti.converter.WeatherResponseToEntity;
 import com.assignment.spring.brunasti.model.WeatherEntity;
 import com.assignment.spring.brunasti.repository.WeatherRepository;
 import com.assignment.spring.brunasti.rest.resources.WeatherResponse;
@@ -16,10 +17,12 @@ import org.springframework.web.client.RestTemplate;
 public class WeatherController {
 
     private final WeatherRepository weatherRepository;
+    private final WeatherResponseToEntity weatherResponseToEntity;
     private final RestTemplate restTemplate;
 
-    WeatherController(WeatherRepository weatherRepository, RestTemplate restTemplate) {
+    WeatherController(WeatherRepository weatherRepository, WeatherResponseToEntity weatherResponseToEntity, RestTemplate restTemplate) {
         this.weatherRepository = weatherRepository;
+        this.weatherResponseToEntity = weatherResponseToEntity;
         this.restTemplate = restTemplate;
     }
 
@@ -31,15 +34,7 @@ public class WeatherController {
         log.info("enter weather url [{}]",url);
 
         ResponseEntity<WeatherResponse> response = restTemplate.getForEntity(url, WeatherResponse.class);
-        return mapper(response.getBody());
-    }
-
-    private WeatherEntity mapper(WeatherResponse response) {
-        WeatherEntity entity = new WeatherEntity();
-        entity.setCity(response.getName());
-        entity.setCountry(response.getSys().getCountry());
-        entity.setTemperature(response.getMain().getTemp());
-
-        return weatherRepository.save(entity);
+        WeatherEntity weatherEntity = weatherResponseToEntity.mapper(response.getBody());
+        return weatherRepository.save(weatherEntity);
     }
 }
