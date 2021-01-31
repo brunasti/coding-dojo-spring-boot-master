@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @Slf4j
 public class WeatherBusinessLogic {
@@ -36,6 +39,13 @@ public class WeatherBusinessLogic {
         log.info("weatherEntity [{}]",weatherEntity);
 
         return weatherRepository.save(weatherEntity);
+    }
+
+    public List<WeatherEntity> retrieveAllWeatherFromDB() {
+        log.info("request all weather ");
+        ArrayList<WeatherEntity> list = new ArrayList<>();
+        weatherRepository.findAll().forEach(weatherEntity -> {list.add(weatherEntity);});
+        return list;
     }
 
 }

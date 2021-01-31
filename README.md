@@ -176,7 +176,16 @@ With the above changes we already got to these new coverage results:
 - 9% of the code lines covered
 
 
+## Check the DB content
+
+To check what have been stored in the DB I create an extra endpoint /weather_all which returns all the records found in the DB
+
+
+
+
 ---
+
+
 # Original README.md
 
 Welcome to the Spring Boot Coding Dojo!
