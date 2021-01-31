@@ -181,6 +181,11 @@ With the above changes we already got to these new coverage results:
 To check what have been stored in the DB I create an extra endpoint /weather_all which returns all the records found in the DB
 
 
+## Error handling
+
+A correct error handling requires the definition of specific set of exception conditions, with correct error codes returned to the clients.
+
+For example in case that an user requires the weather for a city which doesn't exists a CityNotFoundException is internally rised and a 404 code is returned to the user.
 
 
 ---

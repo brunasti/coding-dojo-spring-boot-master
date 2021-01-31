@@ -11,6 +11,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,7 +55,15 @@ class BrunastiApplicationTests {
 	}
 
 	@Test
-	public void testEmptyRun() throws Exception {
+	public void testGetWeather_NonExistingCity() throws Exception {
+		mockMvc.perform(get("/weather?city=cippalippa")
+				)
+				.andDo(print())
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void testEmptyRun() {
 	}
 
 	@Test
@@ -79,5 +90,16 @@ class BrunastiApplicationTests {
 				.andExpect(status().isMethodNotAllowed());
 	}
 
+
+
+	@Test
+	public void testGetAllWeather() throws Exception {
+		List<WeatherEntity> weatherEntities = om.readValue(mockMvc.perform(get("/weather_all")
+		)
+				.andDo(print())
+				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString(), ArrayList.class);
+
+		assertNotNull(weatherEntities);
+	}
 
 }
