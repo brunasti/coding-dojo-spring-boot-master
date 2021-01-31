@@ -167,7 +167,8 @@ But before improving the coverage I need to fix some more structural aspects of 
 
 - removing @Autowired from WeatherController
 - moving the transformation of the WeatherResponse into a WeatherEntity in an ad hoc class and package
-
+- moving the business logic from the controller to an ad hoc class 
+- adding Lombok annotation to have more userfriendly functions in many classes
 
 ---
 # Original README.md
