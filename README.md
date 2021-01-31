@@ -227,9 +227,11 @@ The output of our system is:
         "temperature": 285.66
     }
 
-And this is what we expected.
+This is what we expected.
 
 
+
+---
 
 ---
 
